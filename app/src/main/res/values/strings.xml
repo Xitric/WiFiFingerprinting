@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">WiFiFingerprinting</string>
+    <string name="scan">Scan</string>
+    <string name="location_name">Name</string>
+    <string name="location">Location</string>
+    <string name="status_ready">Ready</string>
+    <string name="status_sampling">Sampling</string>
+    <string name="status_error">Error</string>
+    <string name="status_cleared">Cleared</string>
+    <string name="dump">Dump</string>
+    <string name="clear">Clear</string>
 </resources>
