@@ -5,75 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".SamplingActivity">
+    android:orientation="vertical"
+    tools:context=".sampling.SamplingActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <Button
+        android:id="@+id/btn_sampling"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="samplingAction"
+        android:text="@string/sampling" />
 
-        <Button
-            android:id="@+id/btn_scan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:onClick="scanAction"
-            android:text="@string/scan"
-            app:layout_constraintEnd_toEndOf="@+id/txt_location"
-            app:layout_constraintStart_toStartOf="@+id/txt_location"
-            app:layout_constraintTop_toBottomOf="@+id/txt_location" />
-
-        <Button
-            android:id="@+id/btn_dump"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:onClick="dumpAction"
-            android:text="@string/dump"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_clear"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_status" />
-
-        <Button
-            android:id="@+id/btn_clear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="clearAction"
-            android:text="@string/clear"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/btn_dump"
-            app:layout_constraintTop_toTopOf="@+id/btn_dump" />
-
-        <EditText
-            android:id="@+id/txt_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/location_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbl_location" />
-
-        <TextView
-            android:id="@+id/lbl_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/location"
-            app:layout_constraintStart_toStartOf="@+id/txt_location"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/lbl_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/status_ready"
-            app:layout_constraintEnd_toEndOf="@+id/btn_scan"
-            app:layout_constraintStart_toStartOf="@+id/btn_scan"
-            app:layout_constraintTop_toBottomOf="@id/btn_scan" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btn_classification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="classificationAction"
+        android:text="@string/classification" />
 </LinearLayout>

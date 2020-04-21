@@ -1,4 +1,4 @@
-package dk.sdu.fingerprinting.nearest_neighbor;
+package dk.sdu.fingerprinting.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -15,4 +15,7 @@ public interface TrainingDataDao {
 
     @Query("SELECT * FROM trainingdata")
     LiveData<List<TrainingData>> getAll();
+
+    @Query("DELETE FROM trainingdata")
+    void clear();
 }
