@@ -16,8 +16,14 @@ public interface SampleDao {
     @Query("SELECT * FROM sample")
     LiveData<List<Sample>> getSamples();
 
-    @Query("SELECT * FROM sample WHERE ap_mac = :apMac")
-    LiveData<List<Sample>> getSamples(String apMac);
+    @Query("SELECT * FROM sample WHERE location = :location AND ap_mac = :apMac")
+    LiveData<List<Sample>> getSamples(String location, String apMac);
+
+    @Query("SELECT DISTINCT location from sample")
+    LiveData<List<String>> getLocations();
+
+    @Query("SELECT DISTINCT ap_mac from sample")
+    LiveData<List<String>> getMacAddresses();
 
     @Query("DELETE FROM sample")
     void clear();

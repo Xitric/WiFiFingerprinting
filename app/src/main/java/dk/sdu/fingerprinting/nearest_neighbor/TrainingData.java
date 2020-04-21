@@ -16,7 +16,7 @@ public class TrainingData {
     //N=0, E=1, S=2, W=3
     public int orientation;
 
-    public ArrayList<Pair<String, Integer>> signalStrengths;
+    public List<Pair<String, Integer>> signalStrengths;
 
     public static class SignalStregthTypeConverter {
         @TypeConverter

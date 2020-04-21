@@ -34,7 +34,7 @@ public class SamplingActivity extends AppCompatActivity implements SensorEventLi
     private WifiScanBroadcastReceiver wifiScanBroadcastReceiver = new WifiScanBroadcastReceiver();
     private WifiManager.WifiLock wifiLock;
 
-    private SampleDatabase database;
+    private FingerprintingDatabase database;
     private String currentLabel;
 
     private SensorManager sensorManager;
@@ -52,7 +52,7 @@ public class SamplingActivity extends AppCompatActivity implements SensorEventLi
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         wifiLock = wifiManager.createWifiLock(WifiManager.WIFI_MODE_SCAN_ONLY, SamplingActivity.class.getName());
 
-        database = SampleDatabase.getInstance(this);
+        database = FingerprintingDatabase.getInstance(this);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     }

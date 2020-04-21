@@ -7,21 +7,28 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Sample.class}, version = 1, exportSchema = false)
-public abstract class SampleDatabase extends RoomDatabase {
+import dk.sdu.fingerprinting.nearest_neighbor.TrainingData;
+import dk.sdu.fingerprinting.nearest_neighbor.TrainingDataDao;
 
-    private static SampleDatabase instance;
+@Database(entities = {Sample.class}, version = 1, exportSchema = false)
+@TypeConverters({TrainingData.SignalStregthTypeConverter.class})
+public abstract class FingerprintingDatabase extends RoomDatabase {
+
+    private static FingerprintingDatabase instance;
     private ExecutorService databaseExecutor;
 
     public abstract SampleDao sampleDao();
 
-    public static SampleDatabase getInstance(Context context) {
+    public abstract TrainingDataDao trainingDataDao();
+
+    public static FingerprintingDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context, SampleDatabase.class, "database-name").build();
+            instance = Room.databaseBuilder(context, FingerprintingDatabase.class, "database-name").build();
             instance.databaseExecutor = Executors.newSingleThreadExecutor();
         }
 
