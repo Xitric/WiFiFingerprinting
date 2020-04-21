@@ -13,19 +13,15 @@ public class Sample {
     @ColumnInfo(name = "ap_mac")
     public String apMac;
 
-    @ColumnInfo(name = "ap_ssid")
-    public String ssid;
-
     @ColumnInfo(name = "strength")
     public int signalStrength;
 
     @ColumnInfo(name = "location")
     public String locationLabel;
 
-    public Sample(long timestamp, @NonNull String apMac, String ssid, int signalStrength, String locationLabel) {
+    public Sample(long timestamp, @NonNull String apMac, int signalStrength, String locationLabel) {
         this.timestamp = timestamp;
         this.apMac = apMac;
-        this.ssid = ssid;
         this.signalStrength = signalStrength;
         this.locationLabel = locationLabel;
     }
