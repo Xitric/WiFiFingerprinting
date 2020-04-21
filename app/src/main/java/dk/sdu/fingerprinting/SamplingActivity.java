@@ -39,7 +39,9 @@ public class SamplingActivity extends AppCompatActivity implements SensorEventLi
 
     private SensorManager sensorManager;
     private final float[] orientationAngles = new float[3];
-
+    private final float[] accelerometerReading = new float[3];
+    private final float[] magnetometerReading = new float[3];
+    private final float[] rotationMatrix = new float[9];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +62,18 @@ public class SamplingActivity extends AppCompatActivity implements SensorEventLi
     @Override
     protected void onResume() {
         super.onResume();
-
         registerReceiver(wifiScanBroadcastReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
-        Sensor accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        if (accel != null) {
-            sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_NORMAL, SensorManager.SENSOR_DELAY_UI);
+
+        Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if (accelerometer != null) {
+            Log.i("accelerometer", "Success");
+            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL, SensorManager.SENSOR_DELAY_UI);
         }
 
-        Sensor mag = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
-        if (mag != null) {
-            sensorManager.registerListener(this, mag, SensorManager.SENSOR_DELAY_NORMAL, SensorManager.SENSOR_DELAY_UI);
+        Sensor magneticField = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        if (magneticField != null) {
+            Log.i("magneticField", "Success");
+            sensorManager.registerListener(this, magneticField, SensorManager.SENSOR_DELAY_NORMAL, SensorManager.SENSOR_DELAY_UI);
         }
     }
 
@@ -150,8 +154,7 @@ public class SamplingActivity extends AppCompatActivity implements SensorEventLi
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        float[] accelerometerReading = new float[3];
-        float[] magnetometerReading = new float[3];
+
 
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             System.arraycopy(event.values, 0, accelerometerReading,
@@ -161,11 +164,11 @@ public class SamplingActivity extends AppCompatActivity implements SensorEventLi
                     0, magnetometerReading.length);
         }
 
-        float[] rotationMatrix = new float[9];
         SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading);
         SensorManager.getOrientation(rotationMatrix, orientationAngles);
 
-        Log.i("HelloWorld", Arrays.toString(orientationAngles));
+        Log.i("rotationMatrix", Arrays.toString(rotationMatrix));
+        Log.i("orientationAngles", Arrays.toString(orientationAngles));
     }
 
     @Override
