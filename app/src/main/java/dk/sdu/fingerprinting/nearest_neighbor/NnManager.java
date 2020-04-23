@@ -5,13 +5,13 @@ import android.util.Pair;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import dk.sdu.fingerprinting.FingerprintingDatabase;
+import dk.sdu.fingerprinting.database.FingerprintingDatabase;
+import dk.sdu.fingerprinting.database.TrainingData;
 
 public class NnManager {
 
