@@ -12,4 +12,5 @@
     <string name="clear">Clear</string>
     <string name="sampling">Sampling</string>
     <string name="classification">Classification</string>
+    <string name="where">Where am I?</string>
 </resources>

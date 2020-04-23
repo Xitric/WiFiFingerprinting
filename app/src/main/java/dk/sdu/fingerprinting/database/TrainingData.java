@@ -7,7 +7,9 @@ import androidx.room.Entity;
 import androidx.room.TypeConverter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity(primaryKeys = {"location", "orientation"})
 public class TrainingData {
@@ -18,9 +20,9 @@ public class TrainingData {
     //N=0, E=1, S=2, W=3
     public int orientation;
 
-    public List<Pair<String, Double>> signalStrengths;
+    public Map<String, Double> signalStrengths;
 
-    public TrainingData(String location, int orientation, List<Pair<String, Double>> signalStrengths) {
+    public TrainingData(String location, int orientation, Map<String, Double> signalStrengths) {
         this.location = location;
         this.orientation = orientation;
         this.signalStrengths = signalStrengths;
@@ -28,24 +30,24 @@ public class TrainingData {
 
     public static class SignalStrengthTypeConverter {
         @TypeConverter
-        public static List<Pair<String, Double>> fromString(String value) {
-            List<Pair<String, Double>> result = new ArrayList<>();
+        public static Map<String, Double> fromString(String value) {
+            Map<String, Double> result = new HashMap<>();
 
             for (String station : value.split(",")) {
                 String[] elements = station.split(";");
-                result.add(new Pair<>(elements[0], Double.parseDouble(elements[1])));
+                result.put(elements[0], Double.parseDouble(elements[1]));
             }
 
             return result;
         }
 
         @TypeConverter
-        public static String fromList(List<Pair<String, Double>> value) {
+        public static String fromList(Map<String, Double> value) {
             StringBuilder result = new StringBuilder();
-            for (Pair<String, Double> station : value) {
-                result.append(station.first)
+            for (Map.Entry<String, Double> station : value.entrySet()) {
+                result.append(station.getKey())
                         .append(";")
-                        .append(station.second)
+                        .append(station.getValue())
                         .append(",");
             }
             if (result.length() > 0) {

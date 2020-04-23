@@ -7,7 +7,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dk.sdu.fingerprinting.database.FingerprintingDatabase;
 import dk.sdu.fingerprinting.database.Sample;
@@ -53,7 +55,7 @@ public class ModelTrainer {
             for (String location : locations) {
                 for (int orientation = 0; orientation < 4; orientation++) {
                     List<String> macs = database.sampleDao().getMacAddresses(location, orientation);
-                    List<Pair<String, Double>> stations = new ArrayList<>();
+                    Map<String, Double> stations = new HashMap<>();
 
                     for (String mac : macs) {
                         List<Sample> samples = database.sampleDao().getSamples(location, mac, orientation);
@@ -62,7 +64,7 @@ public class ModelTrainer {
                             totalSignalStrength += sample.signalStrength;
                         }
                         double meanSignalStrength = totalSignalStrength / samples.size();
-                        stations.add(new Pair<>(mac, meanSignalStrength));
+                        stations.put(mac, meanSignalStrength);
                     }
 
                     trainingData.add(new TrainingData(location, orientation, stations));
