@@ -27,20 +27,27 @@ public class NnManager {
     }
 
     public LiveData<String> getLocation(TestData testData, int k) {
-        // Location = classifier
-
         return Transformations.map(database.trainingDataDao().getAll(), (trainingDatas) -> knn(trainingDatas, testData, k));
     }
 
     private String knn(List<TrainingData> trainingDatas, TestData testData, int k) {
+        // trainingDatas:   Combination of classifiers and features
+        // testData:        An instance to be classified
+
+        // For each classifier in the training data, calculate its distance to the test sample
         Set<Pair<String, Double>> locationDistances = new TreeSet<>(new PairComparator());
         for (TrainingData trainingData : trainingDatas) {
             double distance = distance(trainingData, testData);
             String location = trainingData.location;
+
+            // Order the distances from lowest to highest
             locationDistances.add(new Pair<>(location, distance));
         }
 
+        // Select the k nearest instances
         Set<String> kLocations = take(k, locationDistances);
+
+        // Use the most frequent classifier among the k instances
         Map<String, Integer> locationCount = new HashMap<>();
         for (String location : kLocations) {
             if (locationCount.containsKey(location)) {

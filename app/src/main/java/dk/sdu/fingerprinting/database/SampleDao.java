@@ -27,4 +27,7 @@ public interface SampleDao {
 
     @Query("DELETE FROM sample WHERE location = :location")
     void clear(String location);
+
+    @Query("SELECT COUNT(location) FROM sample")
+    LiveData<Integer> count();
 }

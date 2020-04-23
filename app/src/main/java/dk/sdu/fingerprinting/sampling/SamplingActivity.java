@@ -36,6 +36,8 @@ public class SamplingActivity extends AppCompatActivity {
 
         viewModel.getStatus().observe(this, lbl_status::setText);
         viewModel.getOrientation().observe(this, orientation -> lbl_orientation.setText(String.valueOf(orientation)));
+
+        viewModel.count().observe(this, n -> lbl_status.setText(String.valueOf(n)));
     }
 
     public void scanAction(View sender) {

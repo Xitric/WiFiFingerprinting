@@ -1,6 +1,7 @@
 package dk.sdu.fingerprinting.sampling;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -86,5 +87,9 @@ public class SamplingViewModel extends AndroidViewModel {
             status.removeSource(trainStatus);
         });
         status.postValue(R.string.status_training);
+    }
+
+    LiveData<Integer> count() {
+        return database.sampleDao().count();
     }
 }
