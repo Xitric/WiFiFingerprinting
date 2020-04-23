@@ -72,9 +72,9 @@ public class SamplingViewModel extends AndroidViewModel {
         status.postValue(R.string.status_sampling);
     }
 
-    void clear() {
+    void clear(String name) {
         backgroundExecutor.submit(() -> {
-            database.sampleDao().clear();
+            database.sampleDao().clear(name);
             status.postValue(R.string.status_cleared);
         });
     }

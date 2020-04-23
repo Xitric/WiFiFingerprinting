@@ -63,6 +63,6 @@ public class SamplingActivity extends AppCompatActivity {
     }
 
     public void clearAction(View sender) {
-        viewModel.clear();
+        viewModel.clear(txt_location.getText().toString());
     }
 }

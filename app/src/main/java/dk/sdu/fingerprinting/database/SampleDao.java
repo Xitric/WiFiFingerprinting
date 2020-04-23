@@ -25,6 +25,6 @@ public interface SampleDao {
     @Query("SELECT DISTINCT ap_mac from sample WHERE location = :location AND orientation = :orientation")
     List<String> getMacAddresses(String location, int orientation);
 
-    @Query("DELETE FROM sample")
-    void clear();
+    @Query("DELETE FROM sample WHERE location = :location")
+    void clear(String location);
 }

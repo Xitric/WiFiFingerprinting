@@ -33,6 +33,10 @@ public class TrainingData {
         public static Map<String, Double> fromString(String value) {
             Map<String, Double> result = new HashMap<>();
 
+            if (value.length() == 0) {
+                return result;
+            }
+
             for (String station : value.split(",")) {
                 String[] elements = station.split(";");
                 result.put(elements[0], Double.parseDouble(elements[1]));

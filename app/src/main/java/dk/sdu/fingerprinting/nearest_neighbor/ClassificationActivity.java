@@ -25,6 +25,7 @@ public class ClassificationActivity extends AppCompatActivity {
     }
 
     public void findLocationAction(View view) {
+        locationTextView.setText(R.string.thinking);
         testDataSampler.getTestData().observe(this, this::findLocation);
     }
 

@@ -35,11 +35,9 @@ public class NnManager {
     private String knn(List<TrainingData> trainingDatas, TestData testData, int k) {
         Set<Pair<String, Double>> locationDistances = new TreeSet<>(new PairComparator());
         for (TrainingData trainingData : trainingDatas) {
-            if (trainingData.signalStrengths.keySet().containsAll(testData.signalStrengths.keySet())) {
-                double distance = distance(trainingData, testData);
-                String location = trainingData.location;
-                locationDistances.add(new Pair<>(location, distance));
-            }
+            double distance = distance(trainingData, testData);
+            String location = trainingData.location;
+            locationDistances.add(new Pair<>(location, distance));
         }
 
         Set<String> kLocations = take(k, locationDistances);
@@ -68,7 +66,12 @@ public class NnManager {
     private double distance(TrainingData trainingData, TestData testData) {
         double distance = 0;
         for (Map.Entry<String, Double> entry : testData.signalStrengths.entrySet()) {
-            distance += Math.pow(trainingData.signalStrengths.get(entry.getKey()) - entry.getValue(), 2);
+            double trainingSignal = -100;
+            if (trainingData.signalStrengths.containsKey(entry.getKey())) {
+                trainingSignal = trainingData.signalStrengths.get(entry.getKey());
+            }
+
+            distance += Math.pow(trainingSignal - entry.getValue(), 2);
         }
         return distance;
     }

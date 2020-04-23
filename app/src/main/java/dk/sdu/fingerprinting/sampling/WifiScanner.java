@@ -60,16 +60,15 @@ public class WifiScanner extends BroadcastReceiver implements LifecycleObserver 
 
             @Override
             public void run() {
-                sampleCount--;
-
-                if (!wifiManager.startScan()) {
-                    status.postValue(false);
-                }
-
                 if (sampleCount > 0) {
-                    wifiScanHandler.postDelayed(this, 3000);
+                    sampleCount--;
+                    if (!wifiManager.startScan()) {
+                        status.postValue(false);
+                        wifiLock.release();
+                    } else {
+                        wifiScanHandler.postDelayed(this, 3000);
+                    }
                 } else {
-                    wifiLock.release();
                     status.postValue(true);
                 }
             }
@@ -85,6 +84,7 @@ public class WifiScanner extends BroadcastReceiver implements LifecycleObserver 
             return;
         }
 
+        wifiLock.release();
         this.listener.onScanResults(wifiManager.getScanResults());
     }
 

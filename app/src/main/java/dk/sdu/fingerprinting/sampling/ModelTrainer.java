@@ -1,6 +1,7 @@
 package dk.sdu.fingerprinting.sampling;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import android.util.Pair;
 
 import androidx.lifecycle.LiveData;
@@ -41,11 +42,6 @@ public class ModelTrainer {
         }
 
         @Override
-        protected void onPreExecute() {
-            onComplete.postValue(false);
-        }
-
-        @Override
         protected Void doInBackground(Void... voids) {
             database.trainingDataDao().clear();
 
@@ -67,6 +63,7 @@ public class ModelTrainer {
                         stations.put(mac, meanSignalStrength);
                     }
 
+                    Log.i("HelloWorld", location + " : " + orientation + " : " + stations);
                     trainingData.add(new TrainingData(location, orientation, stations));
                 }
             }
