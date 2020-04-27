@@ -1,7 +1,6 @@
 package dk.sdu.fingerprinting.sampling;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -13,8 +12,8 @@ import androidx.lifecycle.Transformations;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import dk.sdu.fingerprinting.database.FingerprintingDatabase;
 import dk.sdu.fingerprinting.R;
+import dk.sdu.fingerprinting.database.FingerprintingDatabase;
 
 public class SamplingViewModel extends AndroidViewModel {
 

@@ -119,5 +119,4 @@ public class NnManager {
             return Double.compare(o1.second, o2.second);
         }
     }
-
 }

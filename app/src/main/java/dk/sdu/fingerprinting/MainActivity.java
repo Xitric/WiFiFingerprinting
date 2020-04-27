@@ -1,10 +1,10 @@
 package dk.sdu.fingerprinting;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import dk.sdu.fingerprinting.nearest_neighbor.ClassificationActivity;
 import dk.sdu.fingerprinting.sampling.SamplingActivity;

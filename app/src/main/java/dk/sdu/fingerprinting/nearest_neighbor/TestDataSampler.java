@@ -8,7 +8,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import dk.sdu.fingerprinting.sampling.OrientationSensor;
@@ -26,11 +25,11 @@ public class TestDataSampler implements OrientationSensor.OrientationSensorListe
         orientationSensor.addListener(this);
     }
 
-    public LiveData<TestData> getTestData(){
+    public LiveData<TestData> getTestData() {
         MutableLiveData<TestData> mutableLiveData = new MutableLiveData<>();
         wifiScanner.addListener(scanResults -> {
             Map<String, Double> signalStrengths = new HashMap<>();
-            for (ScanResult result: scanResults) {
+            for (ScanResult result : scanResults) {
                 signalStrengths.put(result.BSSID, (double) result.level);
             }
             TestData testData = new TestData(orientation, signalStrengths);

@@ -1,14 +1,10 @@
 package dk.sdu.fingerprinting.database;
 
-import android.util.Pair;
-
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.TypeConverter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Entity(primaryKeys = {"location", "orientation"})

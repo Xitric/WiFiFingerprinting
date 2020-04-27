@@ -2,7 +2,6 @@ package dk.sdu.fingerprinting.sampling;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.util.Pair;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
