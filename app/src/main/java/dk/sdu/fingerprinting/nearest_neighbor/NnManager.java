@@ -4,7 +4,6 @@ import androidx.core.util.Pair;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -71,6 +70,12 @@ public class NnManager {
     }
 
     private double distance(TrainingData trainingData, TestData testData) {
+        double signalDistance = signalDistance(trainingData, testData);
+        double orientationDistance = orientationDistance(trainingData, testData);
+        return signalDistance + orientationDistance;
+    }
+
+    private double signalDistance(TrainingData trainingData, TestData testData) {
         double distance = 0;
         for (Map.Entry<String, Double> entry : testData.signalStrengths.entrySet()) {
             double trainingSignal = -100;
@@ -81,6 +86,17 @@ public class NnManager {
             distance += Math.pow(trainingSignal - entry.getValue(), 2);
         }
         return distance;
+    }
+
+    private double orientationDistance(TrainingData trainingData, TestData testData) {
+        //                                        N       E       S         W
+        double[][] coordinates = new double[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        double[] trainingCoordinates = coordinates[trainingData.orientation];
+        double[] testCoordinates = coordinates[testData.orientation];
+
+        double angleRad = Math.atan2(testCoordinates[1], testCoordinates[0]) - Math.atan2(trainingCoordinates[1], trainingCoordinates[0]);
+        double angleDeg = Math.toDegrees(angleRad);
+        return Math.sqrt(Math.abs(angleDeg)) * 2;
     }
 
     private Set<String> take(int k, Set<Pair<String, Double>> locationDistances) {
